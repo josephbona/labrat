@@ -41,3 +41,48 @@ Rat.prototype.turnLeft = function() {
 	this.orientation = lefts[this.orientation];
 	return true;
 }
+
+Rat.prototype.moveForward = function() {
+
+	if(!this.canMoveForward()) {
+		return false;
+	}
+
+	switch (this.orientation) {
+		case "north":
+			this.y += 1;
+			break;
+		case "east":
+			this.x += 1;
+			break;
+		case "south":
+			this.y -= 1;
+			break;
+		case "west":
+			this.x -= 1;
+			break;
+	}
+
+	return true;
+}
+
+Rat.prototype.canMoveForward = function() {
+	if(!this.maze) {
+		return false;
+	}
+	return this.maze.canMove(this.x, this.y, this.orientation);
+};
+
+Rat.prototype.exitMaze = function(steps) {
+	if(this.maze) {
+		while(steps != 0 && (this.x !== this.maze.endX || this.y != this.maze.endY)) {
+			steps -= 1;
+			if(this.canMoveForward()) {
+				this.moveForward();
+				this.turnLeft();
+			} else {
+				this.turnRight();
+			}
+		}
+	}
+};
