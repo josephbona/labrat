@@ -75,7 +75,7 @@ Rat.prototype.canMoveForward = function() {
 
 Rat.prototype.exitMaze = function(steps) {
 	if(this.maze) {
-		while(steps != 0 && (this.x !== this.maze.endX || this.y != this.maze.endY)) {
+		while(steps != 0) {
 			steps -= 1;
 			if(this.canMoveForward()) {
 				this.moveForward();
@@ -83,6 +83,10 @@ Rat.prototype.exitMaze = function(steps) {
 			} else {
 				this.turnRight();
 			}
+			if (this.x == this.maze.endX && this.y == this.maze.endY) {
+				return true;
+			}
 		}
+		return false;
 	}
 };

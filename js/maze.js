@@ -103,4 +103,5 @@ Maze.prototype.canMove = function(x, y, direction) {
 	if(this.spaces[forwardX][forwardY][opposites[direction]]) {
 		return false;
 	}
+	return true;
 };
